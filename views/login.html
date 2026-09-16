@@ -1,0 +1,41 @@
+<%- include('layout.html', { body: `
+<section class="auth-page">
+  <div class="auth-aside">
+    <p class="eyebrow">02 / С возвращением</p>
+    <h1>Продолжи<br><em>свою мысль.</em></h1>
+    <p>
+      Пара карточек сегодня лучше, чем идеальный план завтра. Вернись к
+      своему ритму.
+    </p>
+    <div class="aside-note">
+      <span class="note-dot note-dot-coral"></span>
+      <span>Повторение превращает знание в навык</span>
+    </div>
+  </div>
+  <div class="form-panel">
+    <div class="form-kicker">Твой профиль</div>
+    <h2>Войти</h2>
+    <p class="muted">С возвращением к своим знаниям.</p>
+    ${notice ? `
+      <div class="success" role="status">${escapeHtml(notice)}</div>
+    ` : ''}
+    ${errors.length ? `
+      <div class="alert" role="alert">
+        ${errors.map(error => `
+          <div>${escapeHtml(error)}</div>
+        `).join('')}
+      </div>
+    ` : ''}
+    <form method="post" action="/login">
+      <label>Логин
+        <input name="login" value="${escapeHtml(form.login || '')}" autocomplete="username" required>
+      </label>
+      <label>Пароль
+        <input type="password" name="password" autocomplete="current-password" required>
+      </label>
+      <button class="button button-wide" type="submit">Войти в аккаунт <span aria-hidden="true">→</span></button>
+    </form>
+    <p class="form-foot">Нет аккаунта? <a href="/register">Зарегистрироваться</a></p>
+  </div>
+</section>
+` }) %>

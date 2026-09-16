@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f1ea">
+  <title><%= title ? `${title} · ${siteName}` : siteName %></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="/style.css?v=2">
+  <link rel="stylesheet" href="/polish.css?v=2">
+</head>
+<body>
+  <header class="site-header">
+    <a class="site-header__brand" href="/" aria-label="Flashwise, на главную">
+      <span class="brand-mark">f</span>flash<span class="brand-accent">wise</span>
+    </a>
+    <nav class="site-header__nav" aria-label="Основная навигация">
+      <% if (currentUser) { %>
+        <a href="/dashboard">Мои колоды</a>
+        <span class="user-chip">
+          <span class="avatar"><%= currentUser.username.slice(0, 1).toUpperCase() %></span>
+          <%= currentUser.username %>
+        </span>
+        <form class="inline-form" method="post" action="/logout">
+          <button class="button button-quiet" type="submit">Выйти</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Войти</a>
+        <a class="button button-small" href="/register">
+          Создать аккаунт <span aria-hidden="true">↗</span>
+        </a>
+      <% } %>
+    </nav>
+  </header>
+  <main class="page"><%- body %></main>
+  <footer class="footer">
+    <span>flashwise</span>
+    <span>Учись короче. Запоминай дольше.</span>
+  </footer>
+  <script src="/script.js"></script>
+</body>
+</html>

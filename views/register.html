@@ -1,0 +1,42 @@
+<%- include('layout.html', { body: `
+<section class="auth-page">
+  <div class="auth-aside">
+    <p class="eyebrow">01 / Первый шаг</p>
+    <h1>Сделай место<br><em>для новых идей.</em></h1>
+    <p>
+      Один спокойный уголок для всех твоих колод, вопросов и маленьких
+      побед.
+    </p>
+    <div class="aside-note">
+      <span class="note-dot"></span>
+      <span>Твои знания всегда с тобой</span>
+    </div>
+  </div>
+  <div class="form-panel">
+    <div class="form-kicker">Новый профиль</div>
+    <h2>Создать аккаунт</h2>
+    <p class="muted">Заполни форму, и можно начинать.</p>
+    ${errors.length ? `
+      <div class="alert" role="alert">
+        ${errors.map(error => `
+          <div>${escapeHtml(error)}</div>
+        `).join('')}
+      </div>
+    ` : ''}
+    <form method="post" action="/register">
+      <label>Имя пользователя
+        <input name="username" value="${escapeHtml(form.username || '')}" autocomplete="username" required>
+      </label>
+      <label>Email
+        <input type="email" name="email" value="${escapeHtml(form.email || '')}" autocomplete="email" required>
+      </label>
+      <label>Пароль
+        <input type="password" name="password" autocomplete="new-password" minlength="6" required>
+        <small>Минимум 6 символов</small>
+      </label>
+      <button class="button button-wide" type="submit">Зарегистрироваться <span aria-hidden="true">↗</span></button>
+    </form>
+    <p class="form-foot">Уже с нами? <a href="/login">Войти</a></p>
+  </div>
+</section>
+` }) %>

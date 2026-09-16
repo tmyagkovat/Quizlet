@@ -1,0 +1,9 @@
+<%- include('layout.html', { body: `
+<section class="error-page">
+	<span class="error-code">${status}</span>
+	<p class="eyebrow">Кажется, мы свернули не туда</p>
+	<h1>${escapeHtml(message)}</h1>
+	<p class="muted">Вернись на главную и продолжи свой маршрут.</p>
+	<a class="button" href="/">На главную <span aria-hidden="true">↗</span></a>
+</section>
+` }) %>

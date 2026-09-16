@@ -1,0 +1,80 @@
+<%- include('layout.html', { body: `
+<section class="page-intro dashboard">
+	<div>
+		<p class="eyebrow">Личная библиотека / ${escapeHtml(currentUser.username)}</p>
+		<h1>Мои колоды<span class="accent-dot">.</span></h1>
+		<p class="muted intro-copy">
+			Собирай знания в коллекции, к которым хочется возвращаться.
+		</p>
+	</div>
+	<span class="count-label"><strong>${decks.length}</strong> ${decks.length === 1 ? 'колода' : 'колод'}</span>
+</section>
+
+<section class="dashboard__profile" aria-labelledby="profile-title">
+	<div class="profile-heading">
+		<span class="profile-avatar">${escapeHtml(currentUser.username.slice(0, 1).toUpperCase())}</span>
+		<div>
+			<p class="eyebrow">Твой профиль</p>
+			<h2 id="profile-title">${escapeHtml(currentUser.username)}</h2>
+		</div>
+	</div>
+	<dl class="profile-details">
+		<div><dt>Логин</dt><dd>${escapeHtml(currentUser.username)}</dd></div>
+		<div><dt>Email</dt><dd>${escapeHtml(currentUser.email)}</dd></div>
+		<div><dt>Дата регистрации</dt><dd>${escapeHtml(currentUser.created_at)}</dd></div>
+	</dl>
+</section>
+
+<div class="dashboard__grid">
+	<section>
+		<div class="section-heading compact">
+			<div>
+				<p class="eyebrow">Твоя коллекция</p>
+				<h2>Все материалы</h2>
+			</div>
+			<span class="section-note">Обновляются автоматически</span>
+		</div>
+		<div class="deck-list">
+			${decks.map((deck, index) => `
+				<a class="deck-list__item" href="/decks/${deck.id}">
+					<span class="deck-mark mark-${index % 4}">
+						${escapeHtml(deck.title.slice(0, 1).toUpperCase())}
+					</span>
+					<span class="deck-list__item-copy">
+						<strong>${escapeHtml(deck.title)}</strong>
+						<small>${escapeHtml(deck.description || 'Без описания')}</small>
+					</span>
+					<span class="deck-count">
+						<b>${deck.card_count}</b> карт<br>
+						<span aria-hidden="true">↗</span>
+					</span>
+				</a>
+			`).join('') || '<div class="empty-state">У тебя пока нет колод. Создай первую справа.</div>'}
+		</div>
+	</section>
+	<aside class="create-panel">
+		<p class="eyebrow">Новая коллекция</p>
+		<h2>Что изучаем?</h2>
+		${errors.length ? `
+			<div class="alert" role="alert">
+				${errors.map(error => `
+					<div>${escapeHtml(error)}</div>
+				`).join('')}
+			</div>
+		` : ''}
+		<form method="post" action="/decks">
+			<label>Название
+				<input name="title" value="${escapeHtml(form.title || '')}" placeholder="Например, Испанский A2" required>
+			</label>
+			<label>Короткое описание
+				<textarea
+					name="description"
+					rows="3"
+					placeholder="Что внутри этой колоды?"
+				>${escapeHtml(form.description || '')}</textarea>
+			</label>
+			<button class="button button-wide" type="submit">Создать колоду <span aria-hidden="true">↗</span></button>
+		</form>
+	</aside>
+</div>
+` }) %>

@@ -1,0 +1,63 @@
+<%- include('layout.html', { body: `
+<section class="page-intro deck-heading">
+	<div>
+		<a class="back-link" href="/dashboard">← Все колоды</a>
+		<p class="eyebrow">Колода / ${cards.length} карточек</p>
+		<h1>${escapeHtml(deck.title)}</h1>
+		<p class="muted intro-copy">
+			${escapeHtml(deck.description || 'Добавляй карточки и повторяй их в своем темпе.')}
+		</p>
+	</div>
+	<a class="button" href="/decks/${deck.id}/study">Начать изучение <span aria-hidden="true">→</span></a>
+</section>
+
+<div class="dashboard__grid">
+	<section>
+		<div class="section-heading compact">
+			<div>
+				<p class="eyebrow">Содержание</p>
+				<h2>Карточки <span class="subtle">${cards.length}</span></h2>
+			</div>
+		</div>
+		<div class="card-list">
+			${cards.map((card, index) => `
+				<article class="card-row">
+					<span class="card-number">${String(index + 1).padStart(2, '0')}</span>
+					<div>
+						<strong>${escapeHtml(card.question)}</strong>
+						<p>${escapeHtml(card.answer)}</p>
+					</div>
+					<form method="post" action="/decks/${deck.id}/cards/${card.id}/delete">
+						<button
+							class="icon-button"
+							type="submit"
+							aria-label="Удалить карточку"
+							title="Удалить карточку"
+						>×</button>
+					</form>
+				</article>
+			`).join('') || '<div class="empty-state">В этой колоде пока нет карточек.</div>'}
+		</div>
+	</section>
+	<aside class="create-panel">
+		<p class="eyebrow">Новая карточка</p>
+		<h2>Добавить знание</h2>
+		${errors.length ? `
+			<div class="alert" role="alert">
+				${errors.map(error => `
+					<div>${escapeHtml(error)}</div>
+				`).join('')}
+			</div>
+		` : ''}
+		<form method="post" action="/decks/${deck.id}/cards">
+			<label>Вопрос
+				<textarea name="question" rows="4" placeholder="Что нужно вспомнить?" required></textarea>
+			</label>
+			<label>Ответ
+				<textarea name="answer" rows="4" placeholder="Сформулируй ответ" required></textarea>
+			</label>
+			<button class="button button-wide" type="submit">Добавить карточку <span aria-hidden="true">↗</span></button>
+		</form>
+	</aside>
+</div>
+` }) %>

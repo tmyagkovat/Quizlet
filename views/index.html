@@ -1,0 +1,52 @@
+<%- include('layout.html', { body: `
+<section class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow">Твоя память любит ритм / 2026</p>
+    <h1>Знания,<br><em>которые остаются.</em></h1>
+    <p class="hero-text">
+      Создавай колоды, повторяй важное и превращай сложные темы
+      в уверенность.
+    </p>
+    <div class="hero-actions">
+      <a class="button" href="/register">Начать учиться</a>
+      <a class="text-link" href="/login">У меня уже есть аккаунт →</a>
+    </div>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <div class="orbit-label">BUILD / REPEAT / REMEMBER</div>
+    <div class="floating-card card-back"></div>
+    <div class="floating-card card-front">
+      <span>01 / TODAY</span>
+      <strong>Что ты изучишь сегодня?</strong>
+      <small>Ответ всегда ближе, чем кажется.</small>
+    </div>
+    <span class="hero-stamp">FW<br>°</span>
+  </div>
+</section>
+<section class="info-section" aria-labelledby="info-title">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Как это работает</p>
+      <h2 id="info-title">Учись спокойно.<br>Запоминай надолго.</h2>
+    </div>
+    <span class="section-note">Три простых шага <b>↘</b></span>
+  </div>
+  <div class="info-grid">
+    <article class="info-card">
+      <span class="info-number">01</span>
+      <h3>Создай колоду</h3>
+      <p>Собери в одном месте термины, вопросы и ответы по теме, которую сейчас изучаешь.</p>
+    </article>
+    <article class="info-card">
+      <span class="info-number">02</span>
+      <h3>Повторяй активно</h3>
+      <p>Проверяй себя, переворачивай карточки и замечай, что уже запомнилось.</p>
+    </article>
+    <article class="info-card">
+      <span class="info-number">03</span>
+      <h3>Возвращайся к важному</h3>
+      <p>Короткие регулярные повторы помогают превращать новые знания в уверенный навык.</p>
+    </article>
+  </div>
+</section>
+` }) %>

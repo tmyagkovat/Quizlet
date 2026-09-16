@@ -1,0 +1,76 @@
+<%- include('layout.html', { body: `
+<section class="study-top">
+	<a class="back-link" href="/decks/${deck.id}">
+		← Вернуться к колоде
+	</a>
+
+	<div class="study-heading">
+		<p class="eyebrow">Режим изучения</p>
+		<span class="study-title">${escapeHtml(deck.title)}</span>
+	</div>
+
+	<span id="progress" class="study-progress">
+		${cards.length ? '1' : '0'} / ${cards.length}
+	</span>
+</section>
+
+<section class="study" data-card-count="${cards.length}">
+	${cards.length ? `
+		<div
+			class="study__card"
+			id="study-card"
+			tabindex="0"
+			role="button"
+			aria-label="Перевернуть карточку"
+		>
+			<div class="study-face study-question">
+				<span class="eyebrow">Вопрос</span>
+				<strong id="question">${escapeHtml(cards[0].question)}</strong>
+				<small>Нажми, чтобы увидеть ответ</small>
+			</div>
+
+			<div class="study-face study-answer">
+				<span class="eyebrow">Ответ</span>
+				<strong id="answer">${escapeHtml(cards[0].answer)}</strong>
+				<small>Нажми, чтобы вернуться к вопросу</small>
+			</div>
+		</div>
+
+		<div class="study-controls">
+			<button
+				class="icon-button large"
+				id="previous"
+				type="button"
+				aria-label="Предыдущая карточка"
+			>
+				←
+			</button>
+
+			<button class="button" id="flip" type="button">
+				Показать ответ
+			</button>
+
+			<button
+				class="icon-button large"
+				id="next"
+				type="button"
+				aria-label="Следующая карточка"
+			>
+				→
+			</button>
+		</div>
+	` : `
+		<div class="empty-state study-empty">
+			<h2>Пока нечего изучать</h2>
+			<p>Добавь хотя бы одну карточку в колоду.</p>
+			<a class="button" href="/decks/${deck.id}">
+				Добавить карточку
+			</a>
+		</div>
+	`}
+</section>
+
+<script>
+	window.studyCards = ${JSON.stringify(cards).replace(/</g, '\\u003c')};
+</script>
+` }) %>

@@ -1,0 +1,21 @@
+{
+  "name": "quizlet-clone",
+  "version": "1.0.0",
+  "description": "Server-rendered flashcard deck application",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "mysql2": "^3.24.4"
+  }
+}
